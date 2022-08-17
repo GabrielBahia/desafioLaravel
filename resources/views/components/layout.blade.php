@@ -9,8 +9,8 @@
 </head>
 <body>
     <div class="container mt-3" >
-        <h1> {{ $title }} <h1>
-        <div class="mt-5">
+        <div>
+            <h1> {{ $title }} <h1>
             {{ $slot }}
         </div>
     </div>
