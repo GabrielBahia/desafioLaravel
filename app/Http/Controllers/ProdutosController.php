@@ -17,9 +17,10 @@ class ProdutosController extends Controller
             'Bombom de morango',
             'Bombom de chocolate',
             'Bombom de nutella',
+            'Bombom de paçoca'
         ];
 
-        return view('listar-produtos', compact('produtos'));
+        return view('produtos.index', compact('produtos'));
     }
 
     /**
