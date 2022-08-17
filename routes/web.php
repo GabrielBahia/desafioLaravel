@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProdutosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/dale', function() {
     return view('dale');
 });
+
+Route::get('/produtos', [ProdutosController::class, 'index']);
+
 
 require __DIR__.'/auth.php';
