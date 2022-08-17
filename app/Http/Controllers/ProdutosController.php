@@ -30,7 +30,7 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        //
+        return view('produtos.create');
     }
 
     /**

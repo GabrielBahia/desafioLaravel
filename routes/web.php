@@ -34,6 +34,7 @@ Route::get('/dale', function() {
 });
 
 Route::get('/produtos', [ProdutosController::class, 'index']);
+Route::get('/produtos/criar', [ProdutosController::class, 'create']);
 
 
 require __DIR__.'/auth.php';
