@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+
 class ProdutosController extends Controller
 {
     /**
@@ -12,10 +13,11 @@ class ProdutosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Product::all();
-        return view('produtos.index', compact('produtos'));
+        $products = Product::all();
+        $mensagemSucesso = $request->session()->get('mensagem.sucesso');
+        return view('products.index', compact('products'))->with('mensagemSucesso', $mensagemSucesso);
     }
 
     /**
@@ -25,7 +27,7 @@ class ProdutosController extends Controller
      */
     public function create()
     {
-        return view('produtos.create');
+        return view('products.create');
     }
 
     /**
@@ -36,22 +38,9 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        $nomeProduto = $request->input('nome');
-        $saborProduto = $request->input('sabor');
-        $precoProduto = filter_var($request->input('preco'));
-        $descricaoProduto = $request->input('descricao');
-        $fotoProduto = $request->input('foto');
-
-        $produto = new Product();
-        $produto->nome = $nomeProduto;
-        $produto->sabor = $saborProduto;
-        $produto->preco = $precoProduto;
-        $produto->descricao = $descricaoProduto;
-        $produto->foto = $fotoProduto;
-
-        $produto->save();
-
-        return redirect('/produtos');      
+        $produto = Product::create($request->all());
+        return redirect()->route('products.index')
+        ->with('mensagem.sucesso', "Produto '{$produto->nome}' foi criado com sucesso");   
     }
 
     /**
@@ -71,9 +60,9 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -83,9 +72,11 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Product $product, Request $request)
     {
-        //
+        $product->update($request->all());
+        return redirect()->route('products.index')
+        ->with('mensagem.sucesso', "Produto '{$product->nome}' foi atualizado com sucesso");
     }
 
     /**
@@ -94,8 +85,10 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Product $product)
     {
-        //
+        Product::destroy($product->id);
+        return redirect()->route('products.index')
+        ->with('mensagem.sucesso', "Produto '{$product->nome}' foi removido com sucesso");
     }
 }

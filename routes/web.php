@@ -17,25 +17,33 @@ use App\Http\Controllers\ProdutosController;
 Route::middleware(['auth', 'verified'])->group(function () {
 
     // >>> insira suas rotas aqui !!!!! <<<
-    
+
     Route::get('/', function () {
         return view('dashboard');
     })/*->middleware('auth')*/;
-    
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })/*->middleware(['auth'])*/->name('dashboard');
-    
 });
 
 
-Route::get('/dale', function() {
+Route::get('/dale', function () {
     return view('dale');
 });
 
-Route::get('/produtos', [ProdutosController::class, 'index']);
-Route::get('/produtos/criar', [ProdutosController::class, 'create']);
-Route::post('/produtos/salvar', [ProdutosController::class, 'store']);
 
 
-require __DIR__.'/auth.php';
+
+// Rotas de Produtos
+Route::resource('/products', ProdutosController::class);
+/*Route::controller(ProdutosController::class)->group(function () {
+    Route::get('/produtos', 'index')->name('products.index');
+    Route::get('/produtos/criar', 'create')->name('products.create');
+    Route::post('/produtos/salvar', 'store')->name('products.store');
+    Route::delete('/produtos/deletar/{id}', 'destroy')->name('products.destroy');
+    Route::post('/produtos/editar/{id}', 'edit')->name('products.edit');
+});*/
+
+
+require __DIR__ . '/auth.php';
