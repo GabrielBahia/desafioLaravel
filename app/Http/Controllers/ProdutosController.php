@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
@@ -13,13 +14,7 @@ class ProdutosController extends Controller
      */
     public function index()
     {
-        $produtos = [
-            'Bombom de morango',
-            'Bombom de chocolate',
-            'Bombom de nutella',
-            'Bombom de paçoca'
-        ];
-
+        $produtos = Product::all();
         return view('produtos.index', compact('produtos'));
     }
 
@@ -41,7 +36,22 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nomeProduto = $request->input('nome');
+        $saborProduto = $request->input('sabor');
+        $precoProduto = filter_var($request->input('preco'));
+        $descricaoProduto = $request->input('descricao');
+        $fotoProduto = $request->input('foto');
+
+        $produto = new Product();
+        $produto->nome = $nomeProduto;
+        $produto->sabor = $saborProduto;
+        $produto->preco = $precoProduto;
+        $produto->descricao = $descricaoProduto;
+        $produto->foto = $fotoProduto;
+
+        $produto->save();
+
+        return redirect('/produtos');      
     }
 
     /**

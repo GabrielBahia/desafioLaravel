@@ -35,6 +35,7 @@ Route::get('/dale', function() {
 
 Route::get('/produtos', [ProdutosController::class, 'index']);
 Route::get('/produtos/criar', [ProdutosController::class, 'create']);
+Route::post('/produtos/salvar', [ProdutosController::class, 'store']);
 
 
 require __DIR__.'/auth.php';
