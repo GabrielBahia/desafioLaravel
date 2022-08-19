@@ -87,7 +87,7 @@ class StocksController extends Controller
     public function destroy(Request $request, Stock $stock)
     {
         Stock::destroy($stock->id);
-        return redirect()->route('stock.index')
+        return redirect()->route('stocks.index')
         ->with('mensagem.sucesso', "O estoque da data '{$stock->created_at}' foi removido com sucesso");
     }
 }

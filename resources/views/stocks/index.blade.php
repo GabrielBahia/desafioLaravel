@@ -8,7 +8,7 @@
 
 
         <div class="botao1">  
-            <a href="" class="botao1-2 btn mb-2 me-md-2">Criar novo estoque</a>
+            <a href="{{ route('stocks.create') }}" class="botao1-2 btn mb-2 me-md-2">Criar novo estoque</a>
         </div>
 
         <div class="bloco-secundario">
@@ -29,9 +29,9 @@
                             <td>{{ $stock->quantidade }}</td>
                             <td>{{ $stock->created_at }}</td>
                             <td class="tds-style">
-                                <a href="" class="botoes-marrom btn tds-item-style">Ver</a>
-                                <a href="" class="botoes-marrom btn  tds-item-style">Editar</a>
-                                <form action="" method="post">
+                                <a href="{{ route('stocks.show', $stock->id) }}" class="botoes-marrom btn tds-item-style">Ver</a>
+                                <a href="{{ route('stocks.edit', $stock->id) }}" class="botoes-marrom btn  tds-item-style">Editar</a>
+                                <form action="{{ route('stocks.destroy', $stock->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger tds-item-style" type="submit">Deletar</button>
