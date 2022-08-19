@@ -1,0 +1,81 @@
+body {
+    background-color: #955E42;
+    color: white;
+    font-family: 'Varela Round', sans-serif;
+ }
+
+.imagem-style {
+    height: 500px;
+    width: 500px;
+    border: 8px solid red;
+}   
+
+.title-style{
+    margin-left: 4rem;
+    color: #232020;
+    margin-bottom: 3rem;
+    text-decoration: underline;
+}
+
+.infos-style {
+    display: flex;
+    height: 500px;
+    background-color: yellow;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-items:center;
+}
+
+.table-style {
+    background-color: #232020;
+    color: white;
+    width: 90%;
+    border-radius: 10px;
+    font-size: x-large;
+}
+
+.bloco-principal {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.botao1 {
+    margin-right: 4rem;
+}
+
+.bloco-secundario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-style {
+    background-color: #553739;
+    font-size: x-large;
+    display: flex;
+}
+
+
+.item-nav0 {
+    margin-left: 2rem;
+}
+
+.item-nav {
+    margin-left: 2rem;
+}
+
+.item-nav2 {
+    margin-left: 35rem;
+}
+
+.tds-style {
+    display: flex;
+    justify-content: end;
+}
+
+.tds-item-style {
+    margin-left: 1rem;
+}
