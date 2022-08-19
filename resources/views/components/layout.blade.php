@@ -22,7 +22,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav nav-style2">
-                <a class="nav-item nav-link active item-nav" href="#">Produtos</a>
+                <a class="nav-item nav-link active item-nav" href="{{ route('products.index') }}">Produtos</a>
                 <a class="nav-item nav-link item-nav" href="#">Estoque</a>
                 <a class="nav-item nav-link item-nav" href="#">Clientes</a>
                 <a class="nav-item nav-link item-nav2" href="#">Usuário</a>
@@ -32,6 +32,17 @@
     </nav>
     <div class="container mt-3">
         <h1 class="title-style"> {{ $title }} </h1>
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        
         <div>
             {{ $slot }}
         </div>

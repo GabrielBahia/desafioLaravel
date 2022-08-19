@@ -2,9 +2,9 @@
     <form class="form-edit-style" action="{{ $action }}" method="post">
         @csrf
 
-        @isset($product)
+        @if($update)
             @method('PUT')
-        @endisset
+        @endif
 
         <div>
             <label for="nome" class="form-label label-form-style"> Nome: </label>
@@ -28,6 +28,10 @@
             <input type="text" id="foto" name="foto" class="form-control"
             @isset($product->foto)value="{{ $product->foto }}" @endisset>
         </div>
-        <button type="submit" class="btn btn-lg botao1-2 px-4 mt-3">Criar</button>
+        <button type="submit" class="btn btn-lg botao1-2 px-4 mt-3">
+        @if($update)Editar 
+        @else Criar 
+        @endif
+        </button>
     </form>
 </div>

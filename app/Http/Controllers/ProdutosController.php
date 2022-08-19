@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductsFormRequest;
 
 
 class ProdutosController extends Controller
@@ -36,8 +37,8 @@ class ProdutosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(ProductsFormRequest $request)
+    {   
         $produto = Product::create($request->all());
         return redirect()->route('products.index')
         ->with('mensagem.sucesso', "Produto '{$produto->nome}' foi criado com sucesso");   
@@ -72,7 +73,7 @@ class ProdutosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Product $product, Request $request)
+    public function update(Product $product, ProductsFormRequest $request)
     {
         $product->update($request->all());
         return redirect()->route('products.index')
