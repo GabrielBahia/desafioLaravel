@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use App\Models\ProductsStock;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Stock extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome', 'sabor', 'preco', 'descricao', 'foto'];
+    protected $fillable = ['quantidade'];
 
-    public function stocksProduct()
+    public function productsStock()
     {
         return $this->belongsToMany(ProductsStock::class);
     }

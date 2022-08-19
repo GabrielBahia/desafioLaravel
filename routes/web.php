@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\StocksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,14 +37,10 @@ Route::get('/dale', function () {
 
 
 // Rotas de Produtos
-Route::resource('/products', ProdutosController::class);
-/*Route::controller(ProdutosController::class)->group(function () {
-    Route::get('/produtos', 'index')->name('products.index');
-    Route::get('/produtos/criar', 'create')->name('products.create');
-    Route::post('/produtos/salvar', 'store')->name('products.store');
-    Route::delete('/produtos/deletar/{id}', 'destroy')->name('products.destroy');
-    Route::post('/produtos/editar/{id}', 'edit')->name('products.edit');
-});*/
+Route::resource('/products', ProductsController::class);
+
+// Rotas de Estoque
+Route::resource('/stocks', StocksController::class);
 
 
 require __DIR__ . '/auth.php';
