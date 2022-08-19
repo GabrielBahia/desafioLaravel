@@ -16,17 +16,17 @@
 
 <body>
     <nav class="navbar navbar-expand-lg nav-style">
-        <a class="navbar-brand item-nav0" href="#">BomBom Da Lu</a>
+        <a class="navbar-brand item-nav0 text-nav2" href="#">BomBom Da Lu</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav nav-style2">
                 <a class="nav-item nav-link active item-nav" href="{{ route('products.index') }}">Produtos</a>
-                <a class="nav-item nav-link item-nav" href="#">Estoque</a>
-                <a class="nav-item nav-link item-nav" href="#">Clientes</a>
-                <a class="nav-item nav-link item-nav2" href="#">Usuário</a>
-                <a class="nav-item nav-link " href="#">Logout</a>
+                <a class="nav-item nav-link item-nav text-nav" href="#">Estoque</a>
+                <a class="nav-item nav-link item-nav text-nav" href="#">Clientes</a>
+                <a class="nav-item nav-link item-nav2 text-nav" href="#">Usuário</a>
+                <a class="nav-item nav-link text-nav" href="#">Logout</a>
             </div>
         </div>
     </nav>
