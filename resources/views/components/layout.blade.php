@@ -24,8 +24,8 @@
             <div class="navbar-nav nav-style2">
                 <a class="nav-item nav-link item-nav" href="{{ route('products.index') }}">Produtos</a>
                 <a class="nav-item nav-link item-nav text-nav" href="{{ route('stocks.index') }}">Estoque</a>
-                <a class="nav-item nav-link item-nav text-nav" href="#">Clientes</a>
-                <a class="nav-item nav-link item-nav2 text-nav" href="#">Usuário</a>
+                <a class="nav-item nav-link item-nav text-nav" href="{{ route('users.index') }}">Usuários</a>
+                <a class="nav-item nav-link item-nav2 text-nav" href="">Usuário</a>
                 <a class="nav-item nav-link text-nav" href="#">Logout</a>
             </div>
         </div>

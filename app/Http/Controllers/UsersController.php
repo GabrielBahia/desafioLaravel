@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Stock;
+use App\Models\User;
 
-class StocksController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class StocksController extends Controller
      */
     public function index(Request $request)
     {
-        $stocks = Stock::all();
+        $users = User::all();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
-        return view('stocks.index', compact('stocks'))->with('mensagemSucesso', $mensagemSucesso);
+        return view('users.index', compact('users'))->with('mensagemSucesso', $mensagemSucesso);
     }
 
     /**
@@ -26,7 +26,7 @@ class StocksController extends Controller
      */
     public function create()
     {
-        return view('stocks.create');
+        //
     }
 
     /**
@@ -37,9 +37,7 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        $stock = Stock::create($request->all());
-        return redirect()->route('stocks.index')
-        ->with('mensagem.sucesso', "Estoque da data '{$stock->created_at}' foi criado com sucesso");   
+        //
     }
 
     /**
@@ -48,9 +46,9 @@ class StocksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Stock $stock)
+    public function show($id)
     {
-        return view('stocks.show', compact('stock'));
+        //
     }
 
     /**
@@ -59,9 +57,9 @@ class StocksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stock $stock)
+    public function edit($id)
     {
-        return view('stocks.edit', compact('stock'));
+        //
     }
 
     /**
@@ -71,11 +69,9 @@ class StocksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Stock $stock, Request $request)
+    public function update(Request $request, $id)
     {
-        $stock->update($request->all());
-        return redirect()->route('stocks.index')
-        ->with('mensagem.sucesso', "O estoque da data'{$stock->created_at}' foi atualizado com sucesso");
+        //
     }
 
     /**
@@ -84,10 +80,8 @@ class StocksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Stock $stock)
+    public function destroy($id)
     {
-        Stock::destroy($stock->id);
-        return redirect()->route('stock.index')
-        ->with('mensagem.sucesso', "O estoque da data '{$stock->created_at}' foi removido com sucesso");
+        //
     }
 }

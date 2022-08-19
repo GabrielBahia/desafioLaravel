@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
             $table->unsignedBigInteger('quantidade');
             $table->timestamps();
         });

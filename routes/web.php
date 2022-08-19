@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StocksController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +44,9 @@ Route::resource('/products', ProductsController::class);
 
 // Rotas de Estoque
 Route::resource('/stocks', StocksController::class);
+
+// Rotas de Usuários
+Route::resource('/users', UsersController::class);
 
 
 require __DIR__ . '/auth.php';
