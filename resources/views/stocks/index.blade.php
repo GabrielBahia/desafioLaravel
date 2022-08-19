@@ -16,18 +16,16 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Quantidade</th>
                     <th scope="col">Data</th>
+                    <th scope="col">Quantidade</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($stocks as $stock)
                         <tr >
                             <th scope="row">{{ $stock->id }}</th>
-                            <td>{{ $stock->nome }}</td>
-                            <td>{{ $stock->quantidade }}</td>
                             <td>{{ $stock->created_at }}</td>
+                            <td>{{ $stock->quantidade }}</td>
                             <td class="tds-style">
                                 <a href="{{ route('stocks.show', $stock->id) }}" class="botoes-marrom btn tds-item-style">Ver</a>
                                 <a href="{{ route('stocks.edit', $stock->id) }}" class="botoes-marrom btn  tds-item-style">Editar</a>

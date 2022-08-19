@@ -46,9 +46,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -57,9 +57,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -69,9 +69,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user, Request $request)
     {
-        //
+        $user->update($request->all());
+        return redirect()->route('users.index')
+        ->with('mensagem.sucesso', "O usuário '{$user->name}' foi atualizado com sucesso");
     }
 
     /**
@@ -80,8 +82,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect()->route('users.index')
+        ->with('mensagem.sucesso', "O usuário '{$user->name}' foi removido com sucesso");
     }
 }
