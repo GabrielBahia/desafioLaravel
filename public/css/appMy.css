@@ -44,6 +44,17 @@ body {
     margin-right: 4rem;
 }
 
+.botao1-2 {
+    font-size: x-large;
+    background-color: #553739;
+    color: white;
+}
+
+.botoes-marrom {
+    background-color: #553739;
+    color: white;
+}
+
 .bloco-secundario {
     width: 100%;
     display: flex;
@@ -78,4 +89,24 @@ body {
 
 .tds-item-style {
     margin-left: 1rem;
+}
+
+.form-edit-style {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    width: 70%;
+    background-color:#232020;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.label-form-style {
+    margin-top: 0.5rem;
+    background-color:#232020;
+    font-size: x-large;
+    padding-left: 5px;
+    padding-right: 5px;
+
+
+    border-radius: 8px;
 }
