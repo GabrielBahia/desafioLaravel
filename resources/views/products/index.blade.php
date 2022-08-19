@@ -1,11 +1,11 @@
 <x-layout title="Produtos">
+    @isset($mensagemSucesso)
+        <div class="alert alert-success">
+            {{ $mensagemSucesso}}
+        </div>
+    @endisset    
     <div class="bloco-principal">
 
-        @isset($mensagemSucesso)
-            <div class="alert alert-success">
-                {{ $mensagemSucesso}}
-            </div>
-        @endisset    
 
         <div class="botao1">  
             <a href="{{ route('products.create') }}" class="botao1-2 btn mb-2 me-md-2">Criar novo produto</a>
