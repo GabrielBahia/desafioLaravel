@@ -5,7 +5,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StocksController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\UserController;
-
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +37,10 @@ Route::get('/dale', function () {
 });
 
 
-
+// Rota Pagina inical
+Route::get('/index', function () {
+    return view('index');
+});
 
 // Rotas de Produtos
 Route::resource('/products', ProductsController::class);
