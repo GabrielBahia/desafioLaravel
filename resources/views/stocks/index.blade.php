@@ -1,28 +1,29 @@
 <x-layout title="Estoques">
     @isset($mensagemSucesso)
-        <div class="alert alert-success">
-            {{ $mensagemSucesso}}
-        </div>
-    @endisset    
+    <div class="alert alert-success">
+        {{ $mensagemSucesso}}
+    </div>
+    @endisset
     <div class="bloco-principal">
 
 
-        <div class="botao1">  
+        <div class="botao1">
             <a href="{{ route('stocks.create') }}" class="botao1-2 btn mb-2 me-md-2">Criar novo estoque</a>
         </div>
 
         <div class="bloco-secundario">
-            <table class="table table-style">
+            <table class="table table-custom">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Quantidade</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($stocks as $stock)
-                        <tr >
+                    <?php foreach ($stocks as $stock) : ?>
+                        <tr>
                             <th scope="row">{{ $stock->id }}</th>
                             <td>{{ $stock->created_at }}</td>
                             <td>{{ $stock->quantidade }}</td>
@@ -36,7 +37,7 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

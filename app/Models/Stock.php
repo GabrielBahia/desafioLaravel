@@ -12,8 +12,8 @@ class Stock extends Model
     use HasFactory;
     protected $fillable = ['quantidade'];
 
-    public function productsStock()
+    public function products()
     {
-        return $this->belongsToMany(ProductsStock::class);
+        return $this->belongsToMany(Product::class);
     }
 }

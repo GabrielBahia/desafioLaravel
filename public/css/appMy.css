@@ -40,13 +40,6 @@ body {
     margin-left: 2rem;
 }
 
-.table-style {
-    background-color: #232020;
-    color: white;
-    width: 90%;
-    border-radius: 10px;
-    font-size: x-large;
-}
 
 .bloco-principal {
     display: flex;
@@ -132,3 +125,53 @@ body {
 
     border-radius: 8px;
 }
+
+.bloco-secundario {
+    display: flex;
+    justify-content: center;
+}
+
+.bloco-img-style {
+    flex-direction: column;
+}
+
+.img-logo-style {
+    width: 500px;
+    height: 500px;
+}
+
+.table-custom {
+    color: white;
+    border-radius: 10px;
+    width: 90%;
+    background-color: #232020;
+    font-size: x-large;
+}
+
+.tr-edit-style {
+    display: flex;
+    justify-content: end;
+}
+
+@media (max-width: 768px)
+{
+    .tr-edit-style {
+        display:unset;
+        width: auto;
+    }
+
+    .tds-item-style {
+        margin-left:unset;
+        flex-wrap: wrap;
+    }
+    
+}
+
+@media (max-width: 500px)
+{
+    .btn-custom {
+        margin-bottom: 0.1rem;
+        margin-top: 0.1rem;
+    }
+}
+
