@@ -15,10 +15,10 @@
             <table class="table table-custom">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Preço</th>
-                        <th scope="col"></th>
+                        <th width="10%" scope="col">#</th>
+                        <th width="40%" scope="col">Nome</th>
+                        <th width="35%" scope="col">Preço</th>
+                        <th width="15%" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,14 +27,16 @@
                             <th class="flex" scope="row">{{ $product->id }}</th>
                             <td class="flex">{{ $product->nome }}</td>
                             <td class="flex">R$ {{ $product->preco }}</td>
-                            <td class="tr-edit-style">
-                                <a href="{{ route('products.show', $product->id) }}" class="botoes-marrom btn tds-item-style">Ver</a>
-                                <a href="{{ route('products.edit', $product->id) }}" class="botoes-marrom btn  tds-item-style">Editar</a>
-                                <form action="{{ route('products.destroy', $product->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger tds-item-style" type="submit">Deletar</button>
-                                </form>
+                            <td class="">
+                                <div class="tds-item-style">
+                                    <a href="{{ route('products.show', $product->id) }}" class="botoes-marrom btn">V</a>
+                                    <a href="{{ route('products.edit', $product->id) }}" class="botoes-marrom btn">E</a>
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">X</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>

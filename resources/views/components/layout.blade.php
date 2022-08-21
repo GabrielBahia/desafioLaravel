@@ -23,11 +23,13 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav nav-style2">
-                <a class="nav-item nav-link item-nav" href="{{ route('products.index') }}">Produtos</a>
-                <a class="nav-item nav-link item-nav text-nav" href="{{ route('stocks.index') }}">Estoque</a>
-                <a class="nav-item nav-link item-nav text-nav" href="{{ route('users.index') }}">Usuários</a>
-                <a class="nav-item nav-link item-nav2 text-nav" href="">Usuário</a>
-                <a class="nav-item nav-link text-nav" href="#">Logout</a>
+                <a class="nav-item nav-link item-nav text-nav item-nav1" href="{{ route('products.index') }}">Produtos</a>
+                <a class="nav-item nav-link item-nav text-nav item-nav2" href="{{ route('stocks.index') }}">Estoque</a>
+                <a class="nav-item nav-link item-nav text-nav item-nav3" href="{{ route('users.index') }}">Usuários</a>
+                <div class="item-nav4 item-dentro">
+                    <a class="nav-item nav-link item-nav text-nav" href="">Usuário</a>
+                    <a class="nav-item nav-link item-nav text-nav" href="#">Logout</a>
+                </div>
             </div>
         </div>
     </nav>

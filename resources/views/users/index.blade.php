@@ -1,45 +1,42 @@
 <x-layout title="Usuários">
     @isset($mensagemSucesso)
-        <div class="alert alert-success">
-            {{ $mensagemSucesso}}
-        </div>
-    @endisset    
+    <div class="alert alert-success">
+        {{ $mensagemSucesso}}
+    </div>
+    @endisset
     <div class="bloco-principal">
 
         <div class="bloco-secundario">
-            <table class="table table-style">
+            <table class="table table-custom">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Matrícula</th>
-                    <th scope="col">Fidelidade</th>
-                    <th scope="col">Permissão</th>
+                        <th width="10%" scope="col">#</th>
+                        <th width="40%" scope="col">Nome</th>
+                        <th width="35%" scope="col">Email</th>
+                        <th width="15%" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
-                        <tr >
-                            <th scope="row">{{ $user->id }}</th>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email}}</td>
-                            <td>{{ $user->matricula}}</td>
-                            <td>{{ $user->fidelidade}}</td>
-                            <td>{{ $user->permissao}}</td>
-                            <td class="tds-style">
-                                <a href="" class="botoes-marrom btn tds-item-style">Ver</a>
-                                <a href="" class="botoes-marrom btn  tds-item-style">Editar</a>
-                                <form action="" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger tds-item-style" type="submit">Deletar</button>
-                                </form>
+                    <?php foreach ($users as $user) : ?>
+                        <tr>
+                            <th class="flex" scope="row">{{ $user->id }}</th>
+                            <td class="flex">{{ $user->name}}</td>
+                            <td class="flex">{{ $user->email}}</td>
+                            <td class="">
+                                <div class="tds-item-style">
+                                    <a href="{{ route('users.show', $user->id) }}" class="botoes-marrom btn">V</a>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="botoes-marrom btn">E</a>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">X</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; ?>
                 </tbody>
-            </table>   
+            </table>
         </div>
     </div>
 
