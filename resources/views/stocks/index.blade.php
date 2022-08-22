@@ -25,7 +25,7 @@
                     <?php foreach ($stocks as $stock) : ?>
                         <tr>
                             <th class="flex" scope="row">{{ $stock->id }}</th>
-                            <td class="flex">{{ $stock->id}}</td>
+                            <td class="flex">{{ $stock->data}}</td>
                             <td class="flex">{{ $stock->quantidade }}</td>
                             <td class="">
                                 <div class="tds-item-style">

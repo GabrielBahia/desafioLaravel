@@ -115,7 +115,7 @@ body {
 }
 
 .text-nav2 {
-    color:#955E42;
+    color:#d1a08f;
 }
 
 
@@ -138,11 +138,6 @@ body {
 
 
     border-radius: 8px;
-}
-
-.bloco-secundario {
-    display: flex;
-    justify-content: center;
 }
 
 .bloco-img-style {
@@ -169,6 +164,26 @@ body {
     flex-wrap: nowrap;
 }
 
+.input-qtd-style {
+    max-width: 8rem;
+}
+
+.bnt-stock-style {
+    margin-bottom: 2rem;
+}
+
+.bloco-secundario2 {
+    width: 60rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-data-style {
+    display: flex;
+    margin-bottom: 2rem;
+}
 
 @media (max-width: 400px)
 {

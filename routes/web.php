@@ -48,8 +48,12 @@ Route::resource('/products', ProductsController::class);
 // Rotas de Estoque
 Route::resource('/stocks', StocksController::class);
 
+Route::post('/stocks/selected', [StocksController::class, 'selectedProducts'])->name('stocks.selected');
+
 // Rotas de Usuários
 Route::resource('/users', UsersController::class);
+
+
 
 
 require __DIR__ . '/auth.php';

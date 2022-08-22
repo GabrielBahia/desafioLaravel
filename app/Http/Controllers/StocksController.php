@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Stock;
+use App\Models\Product;
+use App\Models\ProductStock;
+use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Facades\DB;
 
 class StocksController extends Controller
 {
@@ -26,7 +30,9 @@ class StocksController extends Controller
      */
     public function create()
     {
-        return view('stocks.create');
+        $products = Product::all();
+        $selectedProducts = null;
+        return view('stocks.create', compact('products', 'selectedProducts'));
     }
 
     /**
@@ -37,9 +43,41 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        $stock = Stock::create($request->all());
+
+        /*$stocks = Stock::Where('data', $request->data)->get();
+        if (isset($stocks)) {
+            return redirect()->route('stocks.index')
+                ->with('mensagem.sucesso', "ERRO: já existe um estoque com essa data!");
+        }*/
+
+        //dd(Stock::Where('data', $request->data)->get());
+
+        $stock = DB::transaction(function () use ($request) {
+
+            $quantidades = $request->quantidade;
+            $quantidadeTotal = 0;
+            $productsId = [];
+
+            foreach ($quantidades as $key => $quantidade) {
+                $quantidadeTotal += $quantidade;
+                $productsId[] = $key;
+            }
+
+            $stock = Stock::create(['quantidade' => $quantidadeTotal, 'data' => $request->data]);
+            $stock->products()->attach($productsId);
+            $stock->save();
+
+            $stock->products()->sync($productsId);
+
+            foreach ($productsId as $key => $product) {
+                ProductStock::where('product_id', $product)->update(['quantidade_product' => $quantidades[$product]]);
+            }
+
+            return $stock;
+        });
+
         return redirect()->route('stocks.index')
-        ->with('mensagem.sucesso', "Estoque da data '{$stock->created_at}' foi criado com sucesso");   
+            ->with('mensagem.sucesso', "Estoque da data '{$stock->data}' foi criado com sucesso");
     }
 
     /**
@@ -75,7 +113,7 @@ class StocksController extends Controller
     {
         $stock->update($request->all());
         return redirect()->route('stocks.index')
-        ->with('mensagem.sucesso', "O estoque da data'{$stock->created_at}' foi atualizado com sucesso");
+            ->with('mensagem.sucesso', "O estoque da data'{$stock->created_at}' foi atualizado com sucesso");
     }
 
     /**
@@ -88,6 +126,14 @@ class StocksController extends Controller
     {
         Stock::destroy($stock->id);
         return redirect()->route('stocks.index')
-        ->with('mensagem.sucesso', "O estoque da data '{$stock->created_at}' foi removido com sucesso");
+            ->with('mensagem.sucesso', "O estoque da data '{$stock->created_at}' foi removido com sucesso");
+    }
+
+
+    public function selectedProducts(Request $request)
+    {
+        $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
+        $products = Product::all();
+        return view('stocks.create', compact('selectedProducts', 'products'));
     }
 }

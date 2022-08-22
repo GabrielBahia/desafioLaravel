@@ -1,20 +1,83 @@
-<div class="bloco-secundario">
-    <form class="form-edit-style" action="{{ $action }}" method="post">
-        @csrf
+<div class="bloco-principal">
+    
+    <div class="bloco-secundario">
 
-        @if($update)
-            @method('PUT')
-        @endif
-
-        <div>
-            <label for="nome" class="form-label label-form-style"> Produtos: </label>
-            <input type="text" id="nome" name="nome" class="form-control"> 
+        <!-- Button trigger modal -->
+        <div class="bnt-stock-style">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Adicionar produtos
+            </button>
         </div>
 
-        <button type="submit" class="btn btn-lg botao1-2 px-4 mt-3">
-        @if($update)Editar 
-        @else Criar 
-        @endif
-        </button>
-    </form>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar produtos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('stocks.selected') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <?php foreach ($products as $key => $product) : ?>
+                                <div class="form-check">
+                                    <input name="produtoSelecionado[]" class="form-check-input" type="checkbox" value="{{ $product->id }}" id="{{ $key }}" multiple>
+                                    <label class="form-check-label label-form-style" for="{{ $key }}">
+                                        {{ $product->nome }}
+                                    </label>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        @isset($selectedProducts)
+        <form action="{{ $action }}" method="post">
+        @csrf
+
+        
+        
+            <div class="bloco-secundario2">
+                <div class="input-data-style">                   
+                    <label for="data" class="form-label label-form-style"> Data: </label>
+                    <input type="date" id="data" name="data" class="form-control">        
+                </div>                      
+                <table class="table table-custom">
+                    <thead>
+                        <tr>
+                            <th width="40%" scope="col">Nome</th>
+                            <th width="10%" scope="col"></th>
+                            <th width="40%" scope="col">Quantidade</th>
+                            <th width="10%" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($selectedProducts as $key => $selectedProduct) : ?>
+                            <tr>
+                                <td class="flex">{{ $selectedProduct->nome }}</td>
+                                <th> Quantidade: </th>
+                                <td class="">
+                                    <input class="input-qtd-style" type="text" id="" name="quantidade[{{ $selectedProduct->id }}]" class="form-control">
+                                </td>
+                                <th></th>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn btn-lg botao1-2 px-4 mt-3">
+                @if($update)Editar
+                @else Criar
+                @endif
+            </button>
+        </form>
+        @endisset
+    </div>                     
 </div>
