@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/appMy.css')}}">
 </head>
 
@@ -27,8 +27,11 @@
                 <a class="nav-item nav-link item-nav text-nav item-nav2" href="{{ route('stocks.index') }}">Estoque</a>
                 <a class="nav-item nav-link item-nav text-nav item-nav3" href="{{ route('users.index') }}">Usuários</a>
                 <div class="item-nav4 item-dentro">
-                    <a class="nav-item nav-link item-nav text-nav" href="">Usuário</a>
-                    <a class="nav-item nav-link item-nav text-nav" href="#">Logout</a>
+                <a class="nav-item nav-link item-nav text-nav" href="">Usuário</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="nav-item nav-link">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -26,6 +26,13 @@
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
+            <!-- Matricula Address -->
+            <div class="mt-4">
+                <x-label for="matricula" :value="__('Matrícula')" />
+
+                <x-input id="matricula" class="block mt-1 w-full" type="text" name="matricula" :value="old('matricula')" required />
+            </div>
+
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />

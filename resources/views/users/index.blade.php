@@ -19,9 +19,11 @@
                 <tbody>
                     <?php foreach ($users as $user) : ?>
                         <tr>
-                            <th class="flex" scope="row">{{ $user->id }}</th>
-                            <td class="flex">{{ $user->name}}</td>
-                            <td class="flex">{{ $user->email}}</td>
+                            <th scope="row">{{ $user->id }}</th>
+                            <td>{{ $user->name}}</td>
+                            <td >
+                                <p class="limitaC-style">{{ $user->email}}</p>
+                            </td>
                             <td class="">
                                 <div class="tds-item-style">
                                     <a href="{{ route('users.show', $user->id) }}" class="botoes-marrom btn">V</a>

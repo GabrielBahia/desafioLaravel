@@ -2,16 +2,16 @@ body {
     background-color: #955E42;
     color: white;
     font-family: 'Varela Round', sans-serif;
- }
+}
 
 .imagem-style {
     height: 500px;
     width: 500px;
     border: 10px solid #232020;
     border-radius: 10px;
-}   
+}
 
-.title-style{
+.title-style {
     margin-left: 4rem;
     color: #232020;
     margin-bottom: 3rem;
@@ -29,7 +29,7 @@ body {
     display: flex;
     height: 500px;
     width: 500px;
-    background-color:#232020;
+    background-color: #232020;
     border-radius: 10px;
     flex-direction: column;
 }
@@ -82,16 +82,19 @@ body {
     width: 100%;
 }
 
-.nav-style2 .item-nav1{
+.nav-style2 .item-nav1 {
     width: 10%;
 }
-.nav-style2 .item-nav2{
+
+.nav-style2 .item-nav2 {
     width: 10%;
 }
-.nav-style2 .item-nav3{
+
+.nav-style2 .item-nav3 {
     width: 10%;
 }
-.nav-style2 .item-nav4{
+
+.nav-style2 .item-nav4 {
     width: 60%;
 }
 
@@ -111,11 +114,11 @@ body {
 }
 
 .text-nav {
-    color:white;
+    color: white;
 }
 
 .text-nav2 {
-    color:#d1a08f;
+    color: #d1a08f;
 }
 
 
@@ -124,14 +127,14 @@ body {
     margin-top: -1rem;
     margin-bottom: 1rem;
     width: 70%;
-    background-color:#232020;
+    background-color: #232020;
     padding: 20px;
     border-radius: 20px;
 }
 
 .label-form-style {
     margin-top: 0.5rem;
-    background-color:#232020;
+    background-color: #232020;
     font-size: x-large;
     padding-left: 5px;
     padding-right: 5px;
@@ -185,8 +188,14 @@ body {
     margin-bottom: 2rem;
 }
 
-@media (max-width: 400px)
-{
+.limitaC-style {
+    max-width: 7ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 400px) {
     .bloco-principal {
         display: flex;
         justify-content: center;
@@ -201,13 +210,12 @@ body {
     }
 
     .botao1-2 {
-        font-size:20px;
+        font-size: 20px;
     }
 }
 
 
-@media (max-width: 768px)
-{
+@media (max-width: 768px) {
 
     .tds-item-style {
         flex-wrap: wrap;
@@ -217,11 +225,9 @@ body {
 
 
 
-@media (max-width: 500px)
-{
+@media (max-width: 500px) {
     .btn-custom {
         margin-bottom: 0.1rem;
         margin-top: 0.1rem;
     }
 }
-

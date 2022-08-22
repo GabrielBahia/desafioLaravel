@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StocksController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -22,13 +22,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // >>> insira suas rotas aqui !!!!! <<<
 
-    Route::get('/', function () {
+    // Rota Pagina inical
+    Route::get('/index', function () {
+        return view('index');
+    });
+
+    // Rotas de Produtos
+    Route::resource('/products', ProductsController::class);
+
+    // Rotas de Estoque
+    Route::resource('/stocks', StocksController::class);
+
+    Route::post('/stocks/selected', [StocksController::class, 'selectedProducts'])->name('stocks.selected');
+
+    // Rotas de Usuários
+    Route::resource('/users', UsersController::class);
+
+    /*Route::get('/', function () {
         return view('dashboard');
-    })/*->middleware('auth')*/;
+    })->middleware('auth');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
-    })/*->middleware(['auth'])*/->name('dashboard');
+    })->middleware(['auth'])->name('dashboard');
+    */
 });
 
 
@@ -36,22 +53,6 @@ Route::get('/dale', function () {
     return view('dale');
 });
 
-
-// Rota Pagina inical
-Route::get('/index', function () {
-    return view('index');
-});
-
-// Rotas de Produtos
-Route::resource('/products', ProductsController::class);
-
-// Rotas de Estoque
-Route::resource('/stocks', StocksController::class);
-
-Route::post('/stocks/selected', [StocksController::class, 'selectedProducts'])->name('stocks.selected');
-
-// Rotas de Usuários
-Route::resource('/users', UsersController::class);
 
 
 

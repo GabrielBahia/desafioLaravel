@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('matricula')->unique();
-            $table->unsignedBigInteger('fidelidade');
-            $table->boolean('permissao');
+            $table->unsignedBigInteger('fidelidade')->default(0);
+            $table->boolean('permissao')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
