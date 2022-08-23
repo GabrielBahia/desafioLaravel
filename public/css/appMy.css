@@ -223,6 +223,48 @@ body {
     border: unset;
 }
 
+.alert-msg-style {
+    max-width: 100%;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+
+@media (max-width: 1000px) {
+
+    .card-info-style {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-info-style .imagem-style {
+        max-width: 300px;
+        max-height: 300px;
+    }
+
+    .card-info-style .infos-style {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 3rem;
+        margin-left: 0;
+        background-color: red;
+    }
+
+    .card-info-style .infos-style .infos-style-text {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+        margin-left: 0;
+        max-width: 100%;
+        background-color: blue;
+    }
+}
+
+
+
 @media (max-width: 400px) {
     .bloco-principal {
         display: flex;

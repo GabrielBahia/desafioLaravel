@@ -1,6 +1,6 @@
 <x-layout title="Produtos">
     @isset($mensagemSucesso)
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-msg-style">
         {{ $mensagemSucesso}}
     </div>
     @endisset
@@ -46,5 +46,6 @@
             </table>
         </div>
     </div>
+
 
 </x-layout>

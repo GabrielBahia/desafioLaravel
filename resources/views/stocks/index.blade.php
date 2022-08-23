@@ -1,6 +1,6 @@
 <x-layout title="Estoques">
     @isset($mensagemSucesso)
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-msg-style">
         {{ $mensagemSucesso}}
     </div>
     @endisset

@@ -63,7 +63,7 @@ class StocksController extends Controller
                 $quantidadeTotal += $quantidade;
                 $productsId[] = $key;
             }
-
+            
             $stock = Stock::create(['quantidade' => $quantidadeTotal, 'data' => $request->data]);
             $stock->products()->attach($productsId);
             $stock->save();
@@ -88,8 +88,26 @@ class StocksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Stock $stock)
-    {
-        return view('stocks.show', compact('stock'));
+    {   
+        $productstocks = [];
+        $quantidadesProducts = [];
+        $productstocks = ProductStock::where('stock_id', $stock->id)->get();
+        $productIds = [];
+
+        foreach($productstocks as $productstock) {
+            $productIds[] = $productstock->product_id;
+            $quantidadesProducts[$productstock->product_id] = $productstock->quantidade_product;
+        }
+
+        $products = [];
+
+        foreach($productIds as $productId) {
+            $products[] = Product::find($productId);
+        }
+        
+        //dd($products);
+    
+        return view('stocks.show', compact('stock','products', 'quantidadesProducts'));
     }
 
     /**

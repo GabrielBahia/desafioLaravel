@@ -20,9 +20,8 @@
             @isset($product->preco)value="{{ $product->preco }}" @endisset>
 
             <label class="form-label label-form-style" for="descricao">Descrição:</label>
-            <textarea class="form-control" id="descricao" name="descricao" rows="3">  
-                @isset($product->descricao){{$product->descricao}}@endisset
-            </textarea>
+            <input type="text" id="descricao" name="descricao" class="form-control"
+            @isset($product->descricao)value="{{ $product->descricao }}" @endisset>
 
             <label for="foto" class="form-label label-form-style">Foto:</label>
             <input type="text" id="foto" name="foto" class="form-control"

@@ -20,9 +20,8 @@
             @isset($user->matricula)value="{{ $user->matricula }}" @endisset>
 
             <label class="form-label label-form-style" for="fidelidade">Fidelidade:</label>
-            <textarea class="form-control" id="fidelidade" name="fidelidade" rows="3">  
-                @isset($user->fidelidade){{$user->fidelidade}}@endisset
-            </textarea>
+            <input type="text" id="fidelidade" name="fidelidade" class="form-control"
+            @isset($user->fidelidade)value="{{ $user->fidelidade }}" @endisset>
 
             <label for="permissao" class="form-label label-form-style">Permissão:</label>
             <input type="text" id="permissao" name="permissao" class="form-control"

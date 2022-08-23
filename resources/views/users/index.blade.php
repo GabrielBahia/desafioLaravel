@@ -21,7 +21,7 @@
                         <tr>
                             <th scope="row">{{ $user->id }}</th>
                             <td>{{ $user->name}}</td>
-                            <td >
+                            <td>
                                 <p class="limitaC-style">{{ $user->email}}</p>
                             </td>
                             <td class="">
@@ -33,7 +33,7 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger" type="submit">X</button>
                                     </form>
-                                    
+
                                 </div>
                             </td>
                         </tr>
@@ -42,5 +42,7 @@
             </table>
         </div>
     </div>
+
+
 
 </x-layout>
