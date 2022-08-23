@@ -138,13 +138,15 @@ body {
     font-size: x-large;
     padding-left: 5px;
     padding-right: 5px;
-
-
     border-radius: 8px;
 }
 
 .bloco-img-style {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #232020;
 }
 
 .img-logo-style {
@@ -184,15 +186,41 @@ body {
 }
 
 .input-data-style {
+    justify-content: center;
+    align-items: center;
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    background-color: #232020;
+    padding: 3px;
+    border-radius: 8px;
 }
+
+.label-form-style2 {
+    margin-top: 5px;
+    background-color: #232020;
+    font-size: x-large;
+    border-radius: 8px;
+}
+
+.btn-criar-style {
+    margin-left: 3rem;
+    font-size: x-large;
+    background-color: #553739;
+    color: white;
+    padding-left: 20px;
+}
+
 
 .limitaC-style {
     max-width: 7ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.btn-logout-style {
+    background-color: unset;
+    border: unset;
 }
 
 @media (max-width: 400px) {

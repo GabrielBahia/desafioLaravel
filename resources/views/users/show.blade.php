@@ -2,10 +2,10 @@
     <div class="card-info-style">
         <div class="infos-style">
             <label class="infos-style-text" for="">Nome: {{ $user->name }} </label>
-            <label class="infos-style-text" for="">Sabor: {{ $user->email }}</label>
-            <label class="infos-style-text" for="">Preço: R$ {{ $user->matricula }}</label>
-            <label class="infos-style-text" for="">Descrição: {{ $user->fidelidade }}</label>
-            <label class="infos-style-text" for="">Descrição: {{ $user->permissao }}</label>
+            <label class="infos-style-text" for="">Email: {{ $user->email }}</label>
+            <label class="infos-style-text" for="">Matrícula: {{ $user->matricula }}</label>
+            <label class="infos-style-text" for="">Fidelidade: {{ $user->fidelidade }}</label>
+            <label class="infos-style-text" for="">Permissão: {{ $user->permissao }}</label>
         </div>
     </div>
 

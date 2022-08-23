@@ -30,7 +30,7 @@
                 <a class="nav-item nav-link item-nav text-nav" href="">Usuário</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="nav-item nav-link">Logout</button>
+                        <button type="submit" class="nav-item nav-link btn-logout-style item-nav text-nav">Logout</button>
                     </form>
                 </div>
             </div>

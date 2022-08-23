@@ -4,7 +4,7 @@
 
         <!-- Button trigger modal -->
         <div class="bnt-stock-style">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="botao1-2 btn me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Adicionar produtos
             </button>
         </div>
@@ -23,7 +23,7 @@
                             <?php foreach ($products as $key => $product) : ?>
                                 <div class="form-check">
                                     <input name="produtoSelecionado[]" class="form-check-input" type="checkbox" value="{{ $product->id }}" id="{{ $key }}" multiple>
-                                    <label class="form-check-label label-form-style" for="{{ $key }}">
+                                    <label class="form-check-label" style="color:black;" for="{{ $key }}">
                                         {{ $product->nome }}
                                     </label>
                                 </div>
@@ -46,8 +46,8 @@
         
             <div class="bloco-secundario2">
                 <div class="input-data-style">                   
-                    <label for="data" class="form-label label-form-style"> Data: </label>
-                    <input type="date" id="data" name="data" class="form-control">        
+                    <label for="data" class="form-label label-form-style2"> Data: </label>
+                    <input type="date" id="data" name="data" class="form-control data-form-style">        
                 </div>                      
                 <table class="table table-custom">
                     <thead>
@@ -72,7 +72,7 @@
                     </tbody>
                 </table>
             </div>
-            <button type="submit" class="btn btn-lg botao1-2 px-4 mt-3">
+            <button type="submit" class="btn btn-lg btn-criar-style">
                 @if($update)Editar
                 @else Criar
                 @endif
