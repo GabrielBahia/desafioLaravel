@@ -15,7 +15,7 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, User $user)
+    public function index(Request $request, User $user) 
     {
         $products = Product::all();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');

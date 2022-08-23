@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rotas de Usuários
     Route::resource('/users', UsersController::class);
+    Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
 
     Route::get('/', function () {
         return view('index');

@@ -12,8 +12,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, User $user)
     {
+        $this->authorize('view', $user);
         $users = User::all();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
         return view('users.index', compact('users'))->with('mensagemSucesso', $mensagemSucesso);
@@ -48,6 +49,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
         return view('users.show', compact('user'));
     }
 
@@ -90,4 +92,13 @@ class UsersController extends Controller
         return redirect()->route('users.index')
         ->with('mensagem.sucesso', "O usuário '{$user->name}' foi removido com sucesso");
     }
+
+    public function profile(User $user)
+    {
+        dd('chegou');
+        return view('users.profile', compact('user'));
+    }
+
 }
+
+

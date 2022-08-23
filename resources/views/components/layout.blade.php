@@ -20,14 +20,15 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav nav-style2">
                 <a class="nav-item nav-link item-nav text-nav item-nav1" href="{{ route('products.index') }}">Produtos</a>
                 <a class="nav-item nav-link item-nav text-nav item-nav2" href="{{ route('stocks.index') }}">Estoque</a>
-                <a class="nav-item nav-link item-nav text-nav item-nav3" href="{{ route('users.index') }}">Usuários</a>
+                @can('view', Auth::user())
+                    <a class="nav-item nav-link item-nav text-nav item-nav3" href="{{ route('users.index') }}">Usuários</a>
+                @endcan    
                 <div class="item-nav4 item-dentro">
-                <a class="nav-item nav-link item-nav text-nav" href="">Usuário</a>
+                <a class="nav-item nav-link item-nav text-nav" href="{{ route('users.profile') }}">Perfil</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-item nav-link btn-logout-style item-nav text-nav">Logout</button>

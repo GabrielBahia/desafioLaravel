@@ -5,8 +5,7 @@
     </div>
     @endisset
     <div class="bloco-principal">
-
-    @can('create', $user)
+    @can('create', App\Models\Product::class)
         <div class="botao1">
             <a href="{{ route('products.create') }}" class="botao1-2 btn mb-2 me-md-2">Criar novo produto</a>
         </div>
