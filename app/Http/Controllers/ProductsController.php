@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsFormRequest;
 
@@ -14,11 +15,11 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, User $user)
     {
         $products = Product::all();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
-        return view('products.index', compact('products'))->with('mensagemSucesso', $mensagemSucesso);
+        return view('products.index', compact('products', 'user'))->with('mensagemSucesso', $mensagemSucesso);
     }
 
     /**
@@ -26,8 +27,9 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
+        $this->authorize('create', $user);
         return view('products.create');
     }
 
@@ -61,8 +63,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product, User $user)
     {
+        $this->authorize('update', $user);
         return view('products.edit', compact('product'));
     }
 
@@ -86,8 +89,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Product $product)
+    public function destroy(Request $request, Product $product, User $user)
     {
+        $this->authorize('delete', $user);
         Product::destroy($product->id);
         return redirect()->route('products.index')
         ->with('mensagem.sucesso', "Produto '{$product->nome}' foi removido com sucesso");

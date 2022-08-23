@@ -32,16 +32,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rotas de Estoque
     Route::resource('/stocks', StocksController::class);
-
     Route::post('/stocks/selected', [StocksController::class, 'selectedProducts'])->name('stocks.selected');
 
     // Rotas de Usuários
     Route::resource('/users', UsersController::class);
 
-    /*Route::get('/', function () {
-        return view('dashboard');
+    Route::get('/', function () {
+        return view('index');
     })->middleware('auth');
 
+    /*
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth'])->name('dashboard');

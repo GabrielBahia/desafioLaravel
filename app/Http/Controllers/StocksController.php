@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Product;
+use App\Models\User;
 use App\Models\ProductStock;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\DB;
@@ -16,11 +17,11 @@ class StocksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, User $user)
     {
         $stocks = Stock::all();
         $mensagemSucesso = $request->session()->get('mensagem.sucesso');
-        return view('stocks.index', compact('stocks'))->with('mensagemSucesso', $mensagemSucesso);
+        return view('stocks.index', compact('stocks', 'user'))->with('mensagemSucesso', $mensagemSucesso);
     }
 
     /**
@@ -28,8 +29,9 @@ class StocksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
+        $this->authorize('create', $user);
         $products = Product::all();
         $selectedProducts = null;
         return view('stocks.create', compact('products', 'selectedProducts'));
@@ -43,7 +45,6 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-
         /*$stocks = Stock::Where('data', $request->data)->get();
         if (isset($stocks)) {
             return redirect()->route('stocks.index')
@@ -97,8 +98,9 @@ class StocksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stock $stock)
+    public function edit(Stock $stock, User $user)
     {
+        $this->authorize('update', $user);
         return view('stocks.edit', compact('stock'));
     }
 
@@ -122,8 +124,9 @@ class StocksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Stock $stock)
+    public function destroy(Request $request, Stock $stock, User $user)
     {
+        $this->authorize('delete', $user);
         Stock::destroy($stock->id);
         return redirect()->route('stocks.index')
             ->with('mensagem.sucesso', "O estoque da data '{$stock->created_at}' foi removido com sucesso");

@@ -26,13 +26,15 @@
                             </td>
                             <td class="">
                                 <div class="tds-item-style">
-                                    <a href="{{ route('users.show', $user->id) }}" class="botoes-marrom btn">V</a>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="botoes-marrom btn">E</a>
-                                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">X</button>
-                                    </form>
+                                    @can(['show', 'update', 'delete'],$user)
+                                        <a href="{{ route('users.show', $user->id) }}" class="botoes-marrom btn">V</a>
+                                        <a href="{{ route('users.edit', $user->id) }}" class="botoes-marrom btn">E</a>
+                                        <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit">X</button>
+                                        </form>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

@@ -6,10 +6,11 @@
     @endisset
     <div class="bloco-principal">
 
-
+    @can('create', $user)
         <div class="botao1">
             <a href="{{ route('products.create') }}" class="botao1-2 btn mb-2 me-md-2">Criar novo produto</a>
         </div>
+    @endcan
 
         <div class="bloco-secundario">
             <table class="table table-custom">
@@ -30,12 +31,14 @@
                             <td class="">
                                 <div class="tds-item-style">
                                     <a href="{{ route('products.show', $product->id) }}" class="botoes-marrom btn">V</a>
-                                    <a href="{{ route('products.edit', $product->id) }}" class="botoes-marrom btn">E</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">X</button>
-                                    </form>
+                                    @can(['update', 'delete'], $user)
+                                        <a href="{{ route('products.edit', $product->id) }}" class="botoes-marrom btn">E</a>
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit">X</button>
+                                        </form>
+                                    @endcan    
                                 </div>
                             </td>
                         </tr>
