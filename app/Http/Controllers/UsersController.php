@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+
 class UsersController extends Controller
 {
     /**
@@ -93,9 +94,9 @@ class UsersController extends Controller
         ->with('mensagem.sucesso', "O usuário '{$user->name}' foi removido com sucesso");
     }
 
-    public function profile(User $user)
+    public function profile(Request $request, $id)
     {   
-        dd($user);
+        $user = User::find($id);
         return view('users.profile', compact('user'));
     }
 

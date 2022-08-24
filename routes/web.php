@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/stocks/selectedEdit', [StocksController::class, 'selectedProductsEdit'])->name('stocks.selectedEdit');
 
     // Rotas de Usuários
-    Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
+    Route::get('/users/profile{id}', [UsersController::class, 'profile'])->name('users.profile');
     Route::resource('/users', UsersController::class);
 
     Route::get('/', function () {

@@ -28,7 +28,7 @@
                     <a class="nav-item nav-link item-nav text-nav item-nav3" href="{{ route('users.index') }}">Usuários</a>
                 @endcan    
                 <div class="item-nav4 item-dentro"> 
-                <a class="nav-item nav-link item-nav text-nav" href="{{ route('users.profile') }}">Perfil</a>
+                <a class="nav-item nav-link item-nav text-nav" href="{{ route('users.profile', Auth::user()->id) }}">Perfil</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="nav-item nav-link btn-logout-style item-nav text-nav">Logout</button>
