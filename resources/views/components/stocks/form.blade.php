@@ -17,7 +17,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Adicionar produtos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('stocks.selected') }}" method="post">
+                    <form action="{{ $action2 }}" method="post">
                         @csrf
                         <div class="modal-body">
                             <?php foreach ($products as $key => $product) : ?>
@@ -38,16 +38,18 @@
             </div>
         </div>
 
-        @isset($selectedProducts)
-        <form action="{{ $action }}" method="post">
-        @csrf
+        @if(isset($selectedProducts) || $update)
+            <form action="{{ $action }}" method="post"> 
+            @csrf
 
-        
+            @if($update)
+                @method('PUT')
+            @endif
         
             <div class="bloco-secundario2">
                 <div class="input-data-style">                   
                     <label for="data" class="form-label label-form-style2"> Data: </label>
-                    <input type="date" id="data" name="data" class="form-control data-form-style">        
+                    <input type="date" id="data" name="data" class="form-control data-form-style" @isset($stock->data) value="{{ $stock->data }}" @endisset>        
                 </div>                      
                 <table class="table table-custom">
                     <thead>
@@ -64,7 +66,7 @@
                                 <td class="flex">{{ $selectedProduct->nome }}</td>
                                 <th> Quantidade: </th>
                                 <td class="">
-                                    <input class="input-qtd-style" type="text" id="" name="quantidade[{{ $selectedProduct->id }}]" class="form-control">
+                                    <input class="input-qtd-style" type="text" id="" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
                                 </td>
                                 <th></th>
                             </tr>
@@ -78,6 +80,6 @@
                 @endif
             </button>
         </form>
-        @endisset
+        @endif
     </div>                     
 </div>

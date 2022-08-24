@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\ProductStock;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class StocksController extends Controller
 {
@@ -63,15 +64,13 @@ class StocksController extends Controller
                 $quantidadeTotal += $quantidade;
                 $productsId[] = $key;
             }
-            
+
             $stock = Stock::create(['quantidade' => $quantidadeTotal, 'data' => $request->data]);
-            $stock->products()->attach($productsId);
-            $stock->save();
 
             $stock->products()->sync($productsId);
 
             foreach ($productsId as $key => $product) {
-                ProductStock::where('product_id', $product)->update(['quantidade_product' => $quantidades[$product]]);
+                ProductStock::where('product_id', $product)->where('stock_id', $stock->id)->update(['quantidade_product' => $quantidades[$product]]);
             }
 
             return $stock;
@@ -88,26 +87,23 @@ class StocksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Stock $stock)
-    {   
+    {
         $productstocks = [];
-        $quantidadesProducts = [];
         $productstocks = ProductStock::where('stock_id', $stock->id)->get();
+
+        $quantidadesProducts = [];
         $productIds = [];
 
-        foreach($productstocks as $productstock) {
+        foreach ($productstocks as $productstock) {
             $productIds[] = $productstock->product_id;
             $quantidadesProducts[$productstock->product_id] = $productstock->quantidade_product;
         }
 
         $products = [];
 
-        foreach($productIds as $productId) {
-            $products[] = Product::find($productId);
-        }
-        
-        //dd($products);
-    
-        return view('stocks.show', compact('stock','products', 'quantidadesProducts'));
+        $products = Product::whereIn('id', $productIds)->get();
+
+        return view('stocks.show', compact('stock', 'products', 'quantidadesProducts'));
     }
 
     /**
@@ -119,7 +115,27 @@ class StocksController extends Controller
     public function edit(Stock $stock, User $user)
     {
         $this->authorize('update', $user);
-        return view('stocks.edit', compact('stock'));
+
+        $productstocks = [];
+        $productstocks = ProductStock::where('stock_id', $stock->id)->get();
+
+        $quantidadesProducts = [];
+        $productIds = [];
+
+        foreach ($productstocks as $productstock) {
+            $productIds[] = $productstock->product_id;
+            $quantidadesProducts[$productstock->product_id] = $productstock->quantidade_product;
+        }
+
+        $selectedProducts = [];
+
+        foreach ($productIds as $productId) {
+            $selectedProducts[] = Product::find($productId);
+        }
+
+        $products = Product::all();
+
+        return view('stocks.edit', compact('stock', 'products', 'selectedProducts', 'quantidadesProducts'));
     }
 
     /**
@@ -131,9 +147,30 @@ class StocksController extends Controller
      */
     public function update(Stock $stock, Request $request)
     {
-        $stock->update($request->all());
+        $stock = DB::transaction(function () use ($request , $stock) {
+
+            $quantidades = $request->quantidade;
+            $quantidadeTotal = 0;
+            $productsId = [];
+
+            foreach ($quantidades as $key => $quantidade) {
+                $quantidadeTotal += $quantidade;
+                $productsId[] = $key;
+            }
+
+            $stock->update(['quantidade' => $quantidadeTotal, 'data' => $request->data]);
+
+            //$stock->products()->sync($productsId);
+
+            foreach ($productsId as $key => $product) {
+                ProductStock::where('product_id', $product)->where('stock_id', $stock->id)->update(['quantidade_product' => $quantidades[$product]]);
+            }
+
+            return $stock;
+        });
+        
         return redirect()->route('stocks.index')
-            ->with('mensagem.sucesso', "O estoque da data'{$stock->created_at}' foi atualizado com sucesso");
+            ->with('mensagem.sucesso', "O estoque da data'{$stock->data}' foi atualizado com sucesso");
     }
 
     /**
@@ -147,14 +184,26 @@ class StocksController extends Controller
         $this->authorize('delete', $user);
         Stock::destroy($stock->id);
         return redirect()->route('stocks.index')
-            ->with('mensagem.sucesso', "O estoque da data '{$stock->created_at}' foi removido com sucesso");
+            ->with('mensagem.sucesso', "O estoque da data '{$stock->data}' foi removido com sucesso");
     }
 
+    
+    public function selectedProducts(Request $request, Stock $stock)
+    {   
+        dd($stock);
 
-    public function selectedProducts(Request $request)
-    {
         $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
         $products = Product::all();
+
+        if(str_contains(url()->previous(), 'edit')) {
+
+            $stock = Stock::find($id);
+            dd($stock);
+
+            return view('stocks.edit', compact('selectedProducts', 'products'));
+        }
         return view('stocks.create', compact('selectedProducts', 'products'));
     }
+
+
 }

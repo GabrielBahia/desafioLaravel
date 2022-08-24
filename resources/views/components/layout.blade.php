@@ -27,7 +27,7 @@
                 @can('view', Auth::user())
                     <a class="nav-item nav-link item-nav text-nav item-nav3" href="{{ route('users.index') }}">Usuários</a>
                 @endcan    
-                <div class="item-nav4 item-dentro">
+                <div class="item-nav4 item-dentro"> 
                 <a class="nav-item nav-link item-nav text-nav" href="{{ route('users.profile') }}">Perfil</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

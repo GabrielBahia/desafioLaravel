@@ -94,8 +94,8 @@ class UsersController extends Controller
     }
 
     public function profile(User $user)
-    {
-        dd('chegou');
+    {   
+        dd($user);
         return view('users.profile', compact('user'));
     }
 

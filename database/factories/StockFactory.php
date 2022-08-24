@@ -17,7 +17,7 @@ class StockFactory extends Factory
     public function definition()
     {
         return [
-            
+            'data' => fake()->date(),
         ];
     }
 }
