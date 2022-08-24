@@ -94,7 +94,7 @@ return [
     'min' => [
         'array' => 'The :attribute must have at least :min items.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'A :attribute tem que ser maior ou igual a :min.',
         'string' => 'The :attribute must be at least :min characters.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',

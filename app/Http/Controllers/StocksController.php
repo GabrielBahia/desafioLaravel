@@ -11,6 +11,7 @@ use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
+
 class StocksController extends Controller
 {
     /**
@@ -41,18 +42,16 @@ class StocksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StocksFormRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        /*$stocks = Stock::Where('data', $request->data)->get();
-        if (isset($stocks)) {
-            return redirect()->route('stocks.index')
-                ->with('mensagem.sucesso', "ERRO: já existe um estoque com essa data!");
-        }*/
 
-        //dd(Stock::Where('data', $request->data)->get());
+        $validatedRequest = $request->validate([
+            'data' => ['required'],
+            'quantidade' => ['required', 'min:0']
+        ]);
 
         $stock = DB::transaction(function () use ($request) {
 
@@ -116,6 +115,7 @@ class StocksController extends Controller
     {
         $this->authorize('update', $user);
 
+        $products = Product::all();
         $productstocks = [];
         $productstocks = ProductStock::where('stock_id', $stock->id)->get();
 
@@ -127,15 +127,14 @@ class StocksController extends Controller
             $quantidadesProducts[$productstock->product_id] = $productstock->quantidade_product;
         }
 
-        $selectedProducts = [];
-
+        $selectedProductsTotal = [];
+        
         foreach ($productIds as $productId) {
-            $selectedProducts[] = Product::find($productId);
+            $selectedProductsTotal[] = Product::find($productId);
         }
 
-        $products = Product::all();
 
-        return view('stocks.edit', compact('stock', 'products', 'selectedProducts', 'quantidadesProducts'));
+        return view('stocks.edit', compact('stock', 'products', 'selectedProductsTotal', 'quantidadesProducts'));
     }
 
     /**
@@ -160,7 +159,7 @@ class StocksController extends Controller
 
             $stock->update(['quantidade' => $quantidadeTotal, 'data' => $request->data]);
 
-            //$stock->products()->sync($productsId);
+            $stock->products()->sync($productsId);
 
             foreach ($productsId as $key => $product) {
                 ProductStock::where('product_id', $product)->where('stock_id', $stock->id)->update(['quantidade_product' => $quantidades[$product]]);
@@ -188,22 +187,47 @@ class StocksController extends Controller
     }
 
     
-    public function selectedProducts(Request $request, Stock $stock)
+    public function selectedProductsEdit(Request $request)
     {   
-        dd($stock);
 
         $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
         $products = Product::all();
+        $stock = Stock::find($request->id);
 
-        if(str_contains(url()->previous(), 'edit')) {
+        // Pega todos os ids de productstock que possuem o id do stock que esta sendo atualizado
+        $productstocks = [];
+        $productstocks = ProductStock::where('stock_id', $stock->id)->get();
 
-            $stock = Stock::find($id);
-            dd($stock);
+        $quantidadesProducts = [];  // Array relacional do produtos que já estao no estoque(id do produto => quantidade do produto)
+        $productIds = [];           // Ids dos produtos que ja estao no estoque
+        $selectedProductsTotal = [];// Lista de selecionados + lista de produtos que ja estao no estoque
 
-            return view('stocks.edit', compact('selectedProducts', 'products'));
+        foreach ($productstocks as $productstock) {
+            $productIds[] = $productstock->product_id;
+            $selectedProductsTotal[] = Product::find($productstock->product_id);
+            $quantidadesProducts[$productstock->product_id] = $productstock->quantidade_product;
         }
+
+        // Pega a lista de produtos selecionados e verifica se já existe no estoque, caso não exista coloca o produto na lista de seleciados
+        foreach($selectedProducts as $key => $selectedProduct) { 
+            if(!in_array($selectedProduct->id, $productIds)){
+                $selectedProductsTotal[] = Product::find($selectedProduct->id);
+            }
+        }
+
+        return view('stocks.edit', compact('selectedProductsTotal', 'products', 'stock' ,'quantidadesProducts'));
+    }
+
+
+    public function selectedProducts(Request $request)
+    {   
+        $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
+        $products = Product::all();
+
         return view('stocks.create', compact('selectedProducts', 'products'));
     }
+
+
 
 
 }

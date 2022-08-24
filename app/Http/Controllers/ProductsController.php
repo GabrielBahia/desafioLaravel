@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsFormRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ProductsCreated;
 
 
 class ProductsController extends Controller
@@ -41,7 +43,20 @@ class ProductsController extends Controller
      */
     public function store(ProductsFormRequest $request)
     {   
+
         $produto = Product::create($request->all());
+
+        $email = new ProductsCreated(
+            $produto->nome,
+            $produto->preco,
+            $produto->sabor,
+            $produto->descricao,
+            $produto->id
+        );
+
+        $userAdm = User::where('permissao', 1)->get();
+        Mail::to($userAdm[0])->send($email);
+
         return redirect()->route('products.index')
         ->with('mensagem.sucesso', "Produto '{$produto->nome}' foi criado com sucesso");   
     }

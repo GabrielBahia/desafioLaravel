@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\StocksController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Artisan;
+Use App\Mail\ProductsCreated;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rotas de Estoque
     Route::resource('/stocks', StocksController::class);
-    Route::post('/stocks/selected/{id}', [StocksController::class, 'selectedProducts'])->name('stocks.selected');
     Route::post('/stocks/selected', [StocksController::class, 'selectedProducts'])->name('stocks.selected');
+    Route::post('/stocks/selectedEdit', [StocksController::class, 'selectedProductsEdit'])->name('stocks.selectedEdit');
 
     // Rotas de Usuários
     Route::get('/users/profile', [UsersController::class, 'profile'])->name('users.profile');
@@ -43,11 +44,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('index');
     })->middleware('auth');
 
-    /*
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth'])->name('dashboard');
-    */
+    Route::get('/email', function () { 
+        return new ProductsCreated(
+            'Produtot teste',
+            2.50,
+            'chocolate',
+            'teste',
+            1
+        );
+    });
 });
 
 
