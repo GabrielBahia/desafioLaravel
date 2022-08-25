@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         Product::factory(5)->create();
         Stock::factory(3)->create();
         $this->call(StockSeeder::class);
+        
     }
 }

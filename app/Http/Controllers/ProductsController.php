@@ -46,16 +46,14 @@ class ProductsController extends Controller
 
         $produto = Product::create($request->all());
 
-        $email = new ProductsCreated(
+
+        \App\Events\ProductsCreated::dispatch(
             $produto->nome,
             $produto->preco,
             $produto->sabor,
             $produto->descricao,
             $produto->id
         );
-
-        $userAdm = User::where('permissao', 1)->get();
-        Mail::to($userAdm[0])->send($email);
 
         return redirect()->route('products.index')
         ->with('mensagem.sucesso', "Produto '{$produto->nome}' foi criado com sucesso");   

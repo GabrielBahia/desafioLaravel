@@ -47,11 +47,14 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = ['data' => 'required', 'quantidade' => 'required'];
+        $request->validate($rules);
 
-        $validatedRequest = $request->validate([
+
+        /*$validatedRequest = $request->validate([
             'data' => ['required'],
             'quantidade' => ['required', 'min:0']
-        ]);
+        ]);*/
 
         $stock = DB::transaction(function () use ($request) {
 

@@ -49,7 +49,7 @@
                     <label for="data" class="form-label label-form-style2"> Data: </label>
                     <input type="date" id="data" name="data" class="form-control data-form-style" @isset($stock->data) value="{{ $stock->data }}" @endisset>        
                 </div>                      
-                <table class="table table-custom">
+                <table class="table table-custom bloco-secundario3">
                     <thead>
                         <tr>
                             <th width="40%" scope="col">Nome</th>
