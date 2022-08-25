@@ -46,7 +46,6 @@ class ProductsController extends Controller
 
         $produto = Product::create($request->all());
 
-
         \App\Events\ProductsCreated::dispatch(
             $produto->nome,
             $produto->preco,

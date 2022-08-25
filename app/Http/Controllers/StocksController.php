@@ -10,7 +10,7 @@ use App\Models\ProductStock;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-
+use App\Http\Requests\SelectProductsFormRequest;
 
 class StocksController extends Controller
 {
@@ -47,8 +47,24 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = ['data' => 'required', 'quantidade' => 'required'];
+        // Com problema aqui
+        
+        $rules = ['data' => 'required|date'];
         $request->validate($rules);
+
+        if($request->fails()){
+
+            return redirect('stocks/index');
+          }
+
+
+        /*if ($request->data == null || $request->quantidade == null) {
+
+            return view('stocks.create2', compact('selectedProducts', 'products'));
+        }*/
+
+        /*$rules = ['data' => 'required'];
+        $request->validate($rules);*/
 
 
         /*$validatedRequest = $request->validate([
@@ -131,7 +147,7 @@ class StocksController extends Controller
         }
 
         $selectedProductsTotal = [];
-        
+
         foreach ($productIds as $productId) {
             $selectedProductsTotal[] = Product::find($productId);
         }
@@ -149,7 +165,7 @@ class StocksController extends Controller
      */
     public function update(Stock $stock, Request $request)
     {
-        $stock = DB::transaction(function () use ($request , $stock) {
+        $stock = DB::transaction(function () use ($request, $stock) {
 
             $quantidades = $request->quantidade;
             $quantidadeTotal = 0;
@@ -170,7 +186,7 @@ class StocksController extends Controller
 
             return $stock;
         });
-        
+
         return redirect()->route('stocks.index')
             ->with('mensagem.sucesso', "O estoque da data'{$stock->data}' foi atualizado com sucesso");
     }
@@ -189,9 +205,9 @@ class StocksController extends Controller
             ->with('mensagem.sucesso', "O estoque da data '{$stock->data}' foi removido com sucesso");
     }
 
-    
+
     public function selectedProductsEdit(Request $request)
-    {   
+    {
 
         $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
         $products = Product::all();
@@ -203,7 +219,7 @@ class StocksController extends Controller
 
         $quantidadesProducts = [];  // Array relacional do produtos que já estao no estoque(id do produto => quantidade do produto)
         $productIds = [];           // Ids dos produtos que ja estao no estoque
-        $selectedProductsTotal = [];// Lista de selecionados + lista de produtos que ja estao no estoque
+        $selectedProductsTotal = []; // Lista de selecionados + lista de produtos que ja estao no estoque
 
         foreach ($productstocks as $productstock) {
             $productIds[] = $productstock->product_id;
@@ -212,25 +228,21 @@ class StocksController extends Controller
         }
 
         // Pega a lista de produtos selecionados e verifica se já existe no estoque, caso não exista coloca o produto na lista de seleciados
-        foreach($selectedProducts as $key => $selectedProduct) { 
-            if(!in_array($selectedProduct->id, $productIds)){
+        foreach ($selectedProducts as $key => $selectedProduct) {
+            if (!in_array($selectedProduct->id, $productIds)) {
                 $selectedProductsTotal[] = Product::find($selectedProduct->id);
             }
         }
 
-        return view('stocks.edit', compact('selectedProductsTotal', 'products', 'stock' ,'quantidadesProducts'));
+        return view('stocks.edit', compact('selectedProductsTotal', 'products', 'stock', 'quantidadesProducts'));
     }
 
 
-    public function selectedProducts(Request $request)
-    {   
+    public function selectedProducts(SelectProductsFormRequest $request)
+    {
         $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
         $products = Product::all();
 
-        return view('stocks.create', compact('selectedProducts', 'products'));
+        return view('stocks.create2', compact('selectedProducts', 'products'));
     }
-
-
-
-
 }
