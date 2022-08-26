@@ -47,16 +47,26 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        // Com problema aqui
+        // Inicio Validacao dos campos
+        $mensagemErro = "Preencha os campos corretamente";
         $produtosSelecionados = null;
         foreach($request->selectedProducts2 as $key => $product) {
             $produtosSelecionados = json_decode($product, true);  
         }
         $selectedProducts = Product::whereIn('id', array_column($produtosSelecionados, 'id'))->get();
 
-        if ($request->data == null) {
-            return view('stocks.create2', compact('selectedProducts'));
+        $qtdNull = false;
+        foreach($request->quantidade as $qtd) {
+            if($qtd == null)  {
+                $qtdNull = true;
+                break;
+            }
         }
+
+        if ($request->data == null || $qtdNull == true) {
+            return view('stocks.create2', compact('selectedProducts', 'mensagemErro'));
+        }
+        // Fim Validacao dos campos
 
         $stock = DB::transaction(function () use ($request) {
 
@@ -138,8 +148,9 @@ class StocksController extends Controller
             $selectedProductsTotal[] = Product::find($productId);
         }
 
+        $mensagemErro = null;
 
-        return view('stocks.edit', compact('stock', 'products', 'selectedProductsTotal', 'quantidadesProducts'));
+        return view('stocks.edit', compact('stock', 'products', 'selectedProductsTotal', 'quantidadesProducts' ,'mensagemErro'));
     }
 
     /**
@@ -227,7 +238,7 @@ class StocksController extends Controller
     public function selectedProducts(SelectProductsFormRequest $request)
     {
         $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
-        //dd($selectedProducts);
-        return view('stocks.create2', compact('selectedProducts'));
+        $mensagemErro = null;
+        return view('stocks.create2', compact('selectedProducts', 'mensagemErro'));
     }
 }

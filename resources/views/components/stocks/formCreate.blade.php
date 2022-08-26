@@ -1,6 +1,12 @@
 <div class="bloco-principal">
 
     <div class="bloco-secundario">
+        @isset($mensagemErro)
+        <div class="alert alert-danger alert-msg-style">
+            {{ $mensagemErro}}
+        </div>
+        @endisset
+
 
         @if(isset($selectedProducts) || $update)
         <form action="{{ $action }}" method="post">
@@ -9,14 +15,12 @@
             @if($update)
             @method('PUT')
             @endif
-            <?php 
-                $selectedProducts2 = $selectedProducts;
-            ?>
+            <?php $selectedProducts2 = $selectedProducts;?>
 
             <div class="bloco-secundario2">
                 <div class="input-data-style">
                     <label for="data" class="form-label label-form-style2"> Data: </label>
-                    <input type="date" id="data" name="data" class="form-control data-form-style" @isset($stock->data) value="{{ $stock->data }}" @endisset>
+                    <input required type="date" id="data" name="data" class="form-control data-form-style" @isset($stock->data) value="{{ $stock->data }}" @endisset>
                 </div>
                 <table class="table table-custom">
                     <thead>
@@ -34,7 +38,7 @@
                                 <td class="flex">{{ $selectedProduct->nome }}</td>
                                 <th> Quantidade: </th>
                                 <td class="">
-                                    <input class="input-qtd-style" type="text" id="quantidade" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
+                                    <input required class="input-qtd-style" type="text" id="quantidade" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
                                 </td>
                                 <th></th>
                             </tr>
