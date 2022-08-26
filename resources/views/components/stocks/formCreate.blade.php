@@ -1,20 +1,23 @@
 <div class="bloco-principal">
-    
+
     <div class="bloco-secundario">
 
         @if(isset($selectedProducts) || $update)
-            <form action="{{ $action }}" method="post"> 
+        <form action="{{ $action }}" method="post">
             @csrf
 
             @if($update)
-                @method('PUT')
+            @method('PUT')
             @endif
-        
+            <?php 
+                $selectedProducts2 = $selectedProducts;
+            ?>
+
             <div class="bloco-secundario2">
-                <div class="input-data-style">                   
+                <div class="input-data-style">
                     <label for="data" class="form-label label-form-style2"> Data: </label>
-                    <input type="date" id="data" name="data" class="form-control data-form-style" @isset($stock->data) value="{{ $stock->data }}" @endisset>        
-                </div>                      
+                    <input type="date" id="data" name="data" class="form-control data-form-style" @isset($stock->data) value="{{ $stock->data }}" @endisset>
+                </div>
                 <table class="table table-custom">
                     <thead>
                         <tr>
@@ -25,6 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <input hidden name="selectedProducts2[]" value="{{ json_encode($selectedProducts2, TRUE) }}" id="selectedProducts2">
                         <?php foreach ($selectedProducts as $key => $selectedProduct) : ?>
                             <tr>
                                 <td class="flex">{{ $selectedProduct->nome }}</td>
@@ -45,5 +49,5 @@
             </button>
         </form>
         @endif
-    </div>                     
+    </div>
 </div>

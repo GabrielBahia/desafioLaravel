@@ -48,29 +48,15 @@ class StocksController extends Controller
     public function store(Request $request)
     {
         // Com problema aqui
-        
-        $rules = ['data' => 'required|date'];
-        $request->validate($rules);
+        $produtosSelecionados = null;
+        foreach($request->selectedProducts2 as $key => $product) {
+            $produtosSelecionados = json_decode($product, true);  
+        }
+        $selectedProducts = Product::whereIn('id', array_column($produtosSelecionados, 'id'))->get();
 
-        if($request->fails()){
-
-            return redirect('stocks/index');
-          }
-
-
-        /*if ($request->data == null || $request->quantidade == null) {
-
-            return view('stocks.create2', compact('selectedProducts', 'products'));
-        }*/
-
-        /*$rules = ['data' => 'required'];
-        $request->validate($rules);*/
-
-
-        /*$validatedRequest = $request->validate([
-            'data' => ['required'],
-            'quantidade' => ['required', 'min:0']
-        ]);*/
+        if ($request->data == null) {
+            return view('stocks.create2', compact('selectedProducts'));
+        }
 
         $stock = DB::transaction(function () use ($request) {
 
@@ -241,8 +227,7 @@ class StocksController extends Controller
     public function selectedProducts(SelectProductsFormRequest $request)
     {
         $selectedProducts = Product::whereIn('id', $request->produtoSelecionado)->get();
-        $products = Product::all();
-
-        return view('stocks.create2', compact('selectedProducts', 'products'));
+        //dd($selectedProducts);
+        return view('stocks.create2', compact('selectedProducts'));
     }
 }
