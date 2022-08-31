@@ -16,7 +16,7 @@
             @isset($product->sabor)value="{{ $product->sabor }}" @endisset>
 
             <label for="preco" class="form-label label-form-style">Preço:</label>
-            <input required type="text" id="preco" name="preco" class="form-control"
+            <input required type="number" id="preco" name="preco" class="form-control"
             @isset($product->preco)value="{{ $product->preco }}" @endisset>
 
             <label class="form-label label-form-style" for="descricao">Descrição:</label>
