@@ -46,6 +46,7 @@
                     </tbody>
                 </table>
             </div>
+            
             <button type="submit" class="btn btn-lg btn-criar-style">
                 @if($update)Editar
                 @else Criar

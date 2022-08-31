@@ -75,6 +75,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 4rem;
 }
 
 .nav-style {
@@ -227,6 +228,7 @@ body {
     background-color: #553739;
     color: white;
     padding-left: 20px;
+    height: 3.5rem;
 }
 
 
@@ -282,10 +284,6 @@ body {
     margin-bottom: 1rem;
 }
 
-.btn-form-check {
-    margin-top: 2rem;
-}
-
 .btn-item-table {
     margin-right: 0.5rem;
 }
@@ -307,6 +305,21 @@ body {
 .text-footer {
     margin-top: 1rem;
     font-size: 13px;
+}
+
+.area-btn-voltar {
+    display: flex;
+    justify-content: center;
+}
+
+.area-btns-edit {
+    margin-top: -3rem;
+    margin-bottom: 6rem;
+}
+
+.btn-voltar {
+    max-width: 8rem;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 600px) {
