@@ -55,7 +55,7 @@ body {
 }
 
 .botao1 {
-    margin-right: 4rem;
+    margin-right: 3.5rem;
 }
 
 .botao1-2 {
@@ -154,6 +154,7 @@ body {
     align-items: center;
     justify-content: center;
     color: #232020;
+    margin-bottom: 8rem;
 }
 
 .img-logo-style {
@@ -185,11 +186,15 @@ body {
 }
 
 .bloco-secundario2 {
-    width: 60rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.table-edit-stock {
+    width: 50rem;
 }
 
 .bloco-secundario-selected {
@@ -218,7 +223,6 @@ body {
 }
 
 .btn-criar-style {
-    margin-left: 3rem;
     font-size: x-large;
     background-color: #553739;
     color: white;
@@ -286,6 +290,24 @@ body {
     margin-right: 0.5rem;
 }
 
+.footer-style {
+    font-family: 'Varela Round', sans-serif;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4rem;   
+    background-color: #553739;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.text-footer {
+    margin-top: 1rem;
+    font-size: 13px;
+}
 
 @media (max-width: 600px) {
     .form-check-area {
@@ -355,6 +377,17 @@ body {
         justify-content: unset;
         flex-wrap: unset;
     }
+
+    .table-edit-stock {
+        max-width: 30rem;
+    }
+}
+
+
+@media (max-width: 520px) {
+    .table-edit-stock {
+        max-width: 25rem;
+    }
 }
 
 @media (max-width: 400px) {
@@ -374,6 +407,10 @@ body {
     .botao1-2 {
         font-size: 20px;
     }
+
+    .table-edit-stock {
+        max-width: 16rem;
+    }
 }
 
 
@@ -385,6 +422,7 @@ body {
 
     .btn-item-table {
         margin-bottom: 0.5rem;
+        margin-right: unset;
     }
 
     .infos-style {
@@ -392,9 +430,6 @@ body {
     }
 
 }   
-
-
-
 
 @media (max-width: 500px) {
     .btn-custom {
