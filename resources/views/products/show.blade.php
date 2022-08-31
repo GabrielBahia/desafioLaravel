@@ -11,5 +11,4 @@
             <label class="infos-style-text" for="">Descrição: {{ $product->descricao }}</label>
         </div>
     </div>
-
 </x-layout>
