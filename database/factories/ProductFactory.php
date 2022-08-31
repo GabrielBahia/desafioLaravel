@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'sabor' => fake()->colorName,
             'preco' => fake()->randomFloat(2, 1, 10),
             'descricao' => fake()->name(),
-            'foto' => fake()->name(),
+            'foto' => fake()->imageUrl(),
         ];
     }
 }

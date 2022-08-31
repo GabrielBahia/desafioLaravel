@@ -1,7 +1,7 @@
 <x-layout title="Produto: {{ $product->nome }} ">
     <div class="card-info-style">
         <div class="imagem-style">
-            <img class="h-100" src="https://www.drogariaminasbrasil.com.br/media/product/f7a/bombom-arcor-bon-o-bon-sabor-brigadeiro-15-g-c6b.jpg" alt="">
+            <img class="h-100 w-100" src="{{ $product->foto }}" alt="foto do produto">
         </div>
 
         <div class="infos-style">
