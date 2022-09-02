@@ -6,6 +6,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\User;
 use App\Mail\ProductsCreated;
+use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
 
 class EmailUsersAboutProductsCreated implements ShouldQueue

@@ -24,7 +24,7 @@
                             <tr>
                                 <td class="flex">{{ $selectedProduct->nome }}</td>
                                 <td class="">
-                                    <input required class="input-qtd-style" type="number" id="" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
+                                    <input required class="input-qtd-style" type="number" min="1" max="100" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
                                 </td>
                                 <th></th>
                             </tr>

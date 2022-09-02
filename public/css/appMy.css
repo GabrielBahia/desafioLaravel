@@ -239,6 +239,13 @@ body {
     white-space: nowrap;
 }
 
+.limitaC-style2 {
+    max-width: 15ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .btn-logout-style {
     background-color: unset;
     border: unset;
@@ -408,6 +415,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: unset;
+        max-width: 18rem;
     }
 
     .botao1 {

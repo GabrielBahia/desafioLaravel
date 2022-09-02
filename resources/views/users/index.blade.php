@@ -20,7 +20,7 @@
                     <?php foreach ($users as $user) : ?>
                         <tr>
                             <th scope="row">{{ $user->id }}</th>
-                            <td>{{ $user->name}}</td>
+                            <td class="limitaC-style">{{ $user->name}}</td>
                             <td>
                                 <p class="limitaC-style">{{ $user->email}}</p>
                             </td>

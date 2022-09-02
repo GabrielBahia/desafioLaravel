@@ -26,7 +26,6 @@
                     <thead>
                         <tr>
                             <th width="40%" scope="col">Nome</th>
-                            <th width="10%" scope="col"></th>
                             <th width="40%" scope="col">Quantidade</th>
                             <th width="10%" scope="col"></th>
                         </tr>
@@ -36,9 +35,8 @@
                         <?php foreach ($selectedProducts as $key => $selectedProduct) : ?>
                             <tr>
                                 <td class="flex">{{ $selectedProduct->nome }}</td>
-                                <th> Quantidade: </th>
                                 <td class="">
-                                    <input required class="input-qtd-style" type="number" id="quantidade" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
+                                    <input required class="input-qtd-style" type="number" min="1" max="100" id="quantidade" name="quantidade[{{ $selectedProduct->id }}]" class="form-control" @isset($quantidadesProducts[$selectedProduct->id]) value="{{ $quantidadesProducts[$selectedProduct->id] }}" @endisset>
                                 </td>
                                 <th></th>
                             </tr>

@@ -25,7 +25,7 @@
                     <?php foreach ($products as $product) : ?>
                         <tr>
                             <th class="flex" scope="row">{{ $product->id }}</th>
-                            <td class="flex">{{ $product->nome }}</td>
+                            <td class="flex limitaC-style">{{ $product->nome }}</td>
                             <td class="flex">R$ {{ $product->preco }}</td>
                             <td class="">
                                 <div class="tds-item-style">
